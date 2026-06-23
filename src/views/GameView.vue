@@ -5,9 +5,17 @@
 </template>
 
 <script setup>
-import { createDeck, shuffle } from "../game/deck/deckGenerator.js";
+import { createDeck, shuffle }
+  from "../game/deck/deckGenerator.js";
+
 import { createTowerDeck }
   from "../game/setup/createTowerDeck.js";
+
+import { dealTowers }
+  from "../game/setup/dealTowers.js";
+
+import { dealKings }
+  from "../game/setup/dealKings.js";
 
 const deck = createDeck();
 
@@ -18,11 +26,32 @@ const {
   specialReserve,
 } = createTowerDeck(deck);
 
-console.log("Tower Deck:", towerDeck);
-console.log("Tower Deck Size:", towerDeck.length);
+const {
+  player1Tower,
+  player2Tower,
+} = dealTowers(towerDeck);
 
-console.log("Special Reserve:", specialReserve);
-console.log("Special Reserve Size:", specialReserve.length);
+const {
+  player1King,
+  player2King,
+} = dealKings(specialReserve);
+
+console.log("Player 1 Tower");
+console.log(player1Tower);
+
+console.log("Player 2 Tower");
+console.log(player2Tower);
+
+console.log("Remaining Tower Deck");
+console.log(towerDeck.length);
+
+console.log("Player 1 King:", player1King);
+console.log("Player 2 King:", player2King);
+
+console.log(
+  "Special Reserve Remaining:",
+  specialReserve.length
+);
 </script>
 
 <style scoped>
